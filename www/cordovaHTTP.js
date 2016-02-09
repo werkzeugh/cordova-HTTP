@@ -58,15 +58,25 @@ var http = {
          *
         */
         var win = function(result) {
-            var entry = new (require('cordova-plugin-file.FileEntry'))();
-            entry.isDirectory = false;
-            entry.isFile = true;
-            entry.name = result.file.name;
-            entry.fullPath = result.file.fullPath;
-            entry.filesystem = new FileSystem(result.file.filesystemName || (result.file.filesystem == window.PERSISTENT ? 'persistent' : 'temporary'));
-            entry.nativeURL = result.file.nativeURL;
-            success(entry);
+       //console.log("result: ", result.finished, ", ", result.downloaded);
+          if (result.finished) {
+               //console.log("DONE");
+               var entry = new (require('cordova-plugin-file.FileEntry'))();
+               entry.isDirectory = false;
+               entry.isFile = true;
+               entry.name = result.file.name;
+               entry.fullPath = result.file.fullPath;
+               entry.filesystem = new FileSystem(result.file.filesystemName || (result.file.filesystem == window.PERSISTENT ? 'persistent' : 'temporary'));
+               entry.nativeURL = result.file.nativeURL;
+               entry.finished = result.finished;
+               success(entry);
+           }
+           else {
+               success(result);
+           }
+
         };
+
         return exec(win, failure, "CordovaHttpPlugin", "downloadFile", [url, params, headers, filePath]);
     }
 };
@@ -77,7 +87,7 @@ if (typeof angular !== "undefined") {
     angular.module('cordovaHTTP', []).factory('cordovaHTTP', function($timeout, $q) {
         function makePromise(fn, args, async) {
             var deferred = $q.defer();
-            
+
             var success = function(response) {
                 if (async) {
                     $timeout(function() {
@@ -87,7 +97,7 @@ if (typeof angular !== "undefined") {
                     deferred.resolve(response);
                 }
             };
-            
+
             var fail = function(response) {
                 if (async) {
                     $timeout(function() {
@@ -97,15 +107,15 @@ if (typeof angular !== "undefined") {
                     deferred.reject(response);
                 }
             };
-            
+
             args.push(success);
             args.push(fail);
-            
+
             fn.apply(http, args);
-            
+
             return deferred.promise;
         }
-        
+
         var cordovaHTTP = {
             useBasicAuth: function(username, password) {
                 return makePromise(http.useBasicAuth, [username, password]);
