@@ -210,7 +210,8 @@
 - (AFHTTPRequestOperation *)GET:(NSString *)URLString
                      parameters:(id)parameters
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                       progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `HEAD` request.
