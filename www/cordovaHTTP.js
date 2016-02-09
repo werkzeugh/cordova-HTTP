@@ -131,9 +131,7 @@ if (typeof angular !== "undefined") {
             uploadFile: function(url, params, headers, filePath, name) {
                 return makePromise(http.uploadFile, [url, params, headers, filePath, name], true);
             },
-            downloadFile: function(url, params, headers, filePath) {
-                return makePromise(http.downloadFile, [url, params, headers, filePath], true);
-            }
+            downloadFile: http.downloadFile
         };
         return cordovaHTTP;
     });
