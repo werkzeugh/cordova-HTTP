@@ -62,6 +62,9 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
 
                 JSONObject fileEntry = FileUtils.getFilePlugin().getEntryForFile(file);
                 response.put("file", fileEntry);
+                response.put("downloaded", -1);
+                response.put("total", -1);
+                response.put("finished", true);
                 this.getCallbackContext().success(response);
             } else {
                 response.put("error", "There was an error downloading the file");
@@ -99,7 +102,7 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
             resultObj.put("finished", isFinished);
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, resultObj);
-            result.setKeepCallback(!isFinished);
+            result.setKeepCallback(true);
 
             //Send plugin result...
             getCallbackContext().sendPluginResult(result);

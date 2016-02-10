@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="22d81cbe-331e-486f-9224-6f70dc9c611b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java" afterPath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java" afterPath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java" />
     </list>
     <ignored path="cordova-HTTP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,21 +34,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CordovaHttpDownload.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CordovaHttpDownload.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.807692">
-              <caret line="110" column="1" selection-start-line="110" selection-start-column="1" selection-end-line="110" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.34358975">
+              <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpRequest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HttpRequest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37094018">
-              <caret line="3242" column="44" selection-start-line="3242" selection-start-column="44" selection-end-line="3242" selection-end-column="44" />
+            <state vertical-scroll-proportion="-8.346154">
+              <caret line="3242" column="33" selection-start-line="3242" selection-start-column="33" selection-end-line="3242" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -69,8 +68,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/www/cordovaHTTP.js" />
-        <option value="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java" />
         <option value="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java" />
+        <option value="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java" />
       </list>
     </option>
   </component>
@@ -310,12 +309,12 @@
       <option name="number" value="Default" />
       <updated>1455039146772</updated>
       <workItem from="1455039147913" duration="1365000" />
-      <workItem from="1455121928619" duration="35000" />
+      <workItem from="1455121928619" duration="688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1400000" />
+    <option name="totallyTimeSpent" value="2053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="19" width="1920" height="1061" extended-state="0" />
@@ -368,18 +367,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java">
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.807692">
-          <caret line="110" column="1" selection-start-line="110" selection-start-column="1" selection-end-line="110" selection-end-column="1" />
+        <state vertical-scroll-proportion="-8.346154">
+          <caret line="3242" column="33" selection-start-line="3242" selection-start-column="33" selection-end-line="3242" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/HttpRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37094018">
-          <caret line="3242" column="44" selection-start-line="3242" selection-start-column="44" selection-end-line="3242" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.34358975">
+          <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
           <folding />
         </state>
       </provider>
