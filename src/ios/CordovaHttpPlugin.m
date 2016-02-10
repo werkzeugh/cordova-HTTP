@@ -291,6 +291,9 @@
             [dictionary setObject:operation.response.allHeaderFields forKey:@"headers"];
         }
         [dictionary setObject:[filePlugin getDirectoryEntry:filePath isDirectory:NO] forKey:@"file"];
+        [dictionary setObject:@"-1" forKey:@"downloaded"];
+        [dictionary setObject:@"-1" forKey:@"total"];
+        [dictionary setObject:@YES forKey:@"finished"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -303,7 +306,18 @@
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }progress:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        float progressPercentage = (float)totalBytesRead / totalBytesExpectedToRead;
         NSLog(@"download progress: %f", (float)totalBytesRead / totalBytesExpectedToRead);
+        
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        [dictionary setObject:[NSString stringWithFormat:@"%lld", totalBytesRead] forKey:@"downloaded"];
+        [dictionary setObject:[NSString stringWithFormat:@"%lld", totalBytesExpectedToRead] forKey:@"total"];
+        [dictionary setObject:@NO forKey:@"finished"];
+        
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
+        pluginResult.keepCallback = [NSNumber numberWithBool:YES];
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        
     }];
 }
 
