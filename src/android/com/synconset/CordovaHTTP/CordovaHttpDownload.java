@@ -29,10 +29,12 @@ import org.json.JSONObject;
  */
 public class CordovaHttpDownload extends CordovaHttp implements Runnable {
     private String filePath;
+    private int percentage;
 
     public CordovaHttpDownload(String urlString, Map<?, ?> params, Map<String, String> headers, CallbackContext callbackContext, String filePath) {
         super(urlString, params, headers, callbackContext);
         this.filePath = filePath;
+        this.percentage = 0;
     }
 
     @Override
@@ -42,7 +44,6 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
             this.setupSecurity(request);
             request.acceptCharset(CHARSET);
             request.headers(this.getHeaders());
-            //listening to the downaload progress updates...
 
             int code = request.code();
 
@@ -52,6 +53,8 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
             if (code >= 200 && code < 300) {
                 URI uri = new URI(filePath);
                 File file = new File(uri);
+
+                //listening to the downaload progress updates...
                 request.progress(new UploadProgress() {
                     public void onUpload(long downloaded, long total) {
                         sendProgressResult(downloaded, total, false);
@@ -92,13 +95,24 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
 
     private void sendProgressResult(long downloaded, long total, boolean isFinished)
     {
-        Log.i("CordovaHttpDownload", downloaded +" finished from "+ total);
-
-        //Create the result's JSON object...
-        JSONObject resultObj = new JSONObject();
         try {
-            resultObj.put("downloaded", downloaded);
-            resultObj.put("total", total);
+            if(!isFinished)
+            {
+                int temp = (int) (downloaded * 100 / total);
+                if(temp > 0 && temp > getPercentage())
+                    setPercentage(temp);
+                else
+                    return;
+            }
+            else
+            {
+                setPercentage(100);
+            }
+
+            //Create the result's JSON object...
+            JSONObject resultObj = new JSONObject();
+
+            resultObj.put("percentage", getPercentage());
             resultObj.put("finished", isFinished);
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, resultObj);
@@ -107,8 +121,21 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
             //Send plugin result...
             getCallbackContext().sendPluginResult(result);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
+
+    //region Properties
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    //endregion
 }
