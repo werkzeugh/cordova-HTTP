@@ -63,10 +63,10 @@ public class CordovaHttpDownload extends CordovaHttp implements Runnable {
 
                 request.receive(file);
 
+                setPercentage(100);
                 JSONObject fileEntry = FileUtils.getFilePlugin().getEntryForFile(file);
                 response.put("file", fileEntry);
-                response.put("downloaded", -1);
-                response.put("total", -1);
+                response.put("percentage", 100);
                 response.put("finished", true);
                 this.getCallbackContext().success(response);
             } else {
