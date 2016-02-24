@@ -5,10 +5,14 @@ package com.synconset;
 
 import java.net.UnknownHostException;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
+
+import android.text.TextUtils;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -16,11 +20,66 @@ import android.util.Log;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
+
+import java.util.Iterator;
  
 public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
     
-    public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
+    final String KEY_FORMAT = "[%s]";
+	
+	public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
         super(urlString, jsonObj, headers, callbackContext);
+    }
+	
+	private Map<String, String> parseJson(JSONObject jsonObject, String prefix)
+    {
+        Map<String, String> entities = new HashMap();
+
+        if(jsonObject == null)
+            return entities;
+
+        if(prefix == null)
+            prefix = "";
+
+        try
+        {
+            Iterator<String> iterator = jsonObject.keys();
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                try {
+                    Object value = jsonObject.get(key);
+                    if(value == null)
+                        continue;
+
+                    if ( value instanceof JSONObject ) {
+                        entities.putAll(parseJson((JSONObject) value, prefix + key));
+                    }
+                    else if( value instanceof JSONArray){
+                        for (int i = 0; i < ((JSONArray) value).length(); i++) {
+                            entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
+                                            prefix +
+                                            key +
+                                            String.format(KEY_FORMAT, String.valueOf(i))));
+                        }
+                    }
+                    else
+                    {
+                        if(!TextUtils.isEmpty(prefix)) //Don't add bracket to the root elements!
+                            key = prefix + String.format(KEY_FORMAT, key);
+
+                        entities.put(key, String.valueOf(value));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return entities;
     }
     
     @Override
@@ -29,8 +88,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
             HttpRequest request = HttpRequest.post(this.getUrlString());
             this.setupSecurity(request);
             request.headers(this.getHeaders());
-            request.acceptJson();
-			request.form(getJsonObject().toString());
+			request.form(parseJson(getJsonObject(), null));
             int code = request.code();
             String body = request.body(CHARSET);
             JSONObject response = new JSONObject();
