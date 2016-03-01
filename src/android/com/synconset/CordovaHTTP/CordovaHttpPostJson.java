@@ -22,16 +22,16 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 import java.util.Iterator;
- 
+
 public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
-    
+
     final String KEY_FORMAT = "[%s]";
-	
-	public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
+
+    public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
         super(urlString, jsonObj, headers, callbackContext);
     }
-	
-	private Map<String, String> parseJson(JSONObject jsonObject, String prefix)
+
+    private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth)
     {
         Map<String, String> entities = new HashMap();
 
@@ -52,14 +52,24 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
                         continue;
 
                     if ( value instanceof JSONObject ) {
-                        entities.putAll(parseJson((JSONObject) value, prefix + key));
+                        entities.putAll(parseJson((JSONObject) value, prefix + key, depth + 1));
                     }
                     else if( value instanceof JSONArray){
-                        for (int i = 0; i < ((JSONArray) value).length(); i++) {
-                            entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
-                                            prefix +
-                                            key +
-                                            String.format(KEY_FORMAT, String.valueOf(i))));
+                        //no brackets if we have a root element
+                        if(depth == 0) {
+                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
+                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
+                                        prefix +
+                                                key +
+                                                String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
+                            }
+                        } else {
+                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
+                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
+                                        prefix +
+                                                String.format(KEY_FORMAT, key) +
+                                                String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
+                            }
                         }
                     }
                     else
@@ -81,14 +91,14 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
 
         return entities;
     }
-    
+
     @Override
     public void run() {
         try {
             HttpRequest request = HttpRequest.post(this.getUrlString());
             this.setupSecurity(request);
             request.headers(this.getHeaders());
-			request.form(parseJson(getJsonObject(), null));
+            request.form(parseJson(getJsonObject(), null, 0));
             int code = request.code();
             String body = request.body(CHARSET);
             JSONObject response = new JSONObject();
