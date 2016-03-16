@@ -28,6 +28,8 @@
 #import <CoreServices/CoreServices.h>
 #endif
 
+#define RESERVER_TIMEOUT_INTERVAL ((int) 20)
+
 NSString * const AFURLRequestSerializationErrorDomain = @"com.alamofire.error.serialization.request";
 NSString * const AFNetworkingOperationFailingURLRequestErrorKey = @"com.alamofire.serialization.request.error.response";
 
@@ -326,6 +328,8 @@ forHTTPHeaderField:(NSString *)field
     }
     
     mutableRequest = [[self requestBySerializingRequest:mutableRequest withParameters:parameters error:error] mutableCopy];
+    
+    [mutableRequest setTimeoutInterval:RESERVER_TIMEOUT_INTERVAL];
     
     return mutableRequest;
 }
