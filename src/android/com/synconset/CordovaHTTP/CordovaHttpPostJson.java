@@ -1,4 +1,4 @@
-/**
+﻿/**
  * A HTTP plugin for Cordova / Phonegap
  */
 package com.synconset;
@@ -31,6 +31,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
         super(urlString, jsonObj, headers, callbackContext);
     }
 
+    
     private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth)
     {
         Map<String, String> entities = new HashMap();
