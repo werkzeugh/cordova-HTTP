@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22d81cbe-331e-486f-9224-6f70dc9c611b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" afterPath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
     </list>
     <ignored path="cordova-HTTP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,13 +52,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CordovaHttpPost.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CordovaHttpPost.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4809348">
+            <state vertical-scroll-proportion="-14.481482">
               <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CordovaHttpPostJson.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -632,22 +645,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29643297">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+        <state vertical-scroll-proportion="-14.481482">
+          <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4809348">
-          <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
