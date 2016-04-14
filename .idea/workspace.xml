@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="22d81cbe-331e-486f-9224-6f70dc9c611b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" afterPath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cordova-HTTP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,8 +47,8 @@
       <file leaf-file-name="CordovaHttpPost.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.555555">
-              <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+            <state vertical-scroll-proportion="-1.8888888">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="22" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -60,11 +59,9 @@
       <file leaf-file-name="CordovaHttpPostJson.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.958231">
-              <caret line="93" column="4" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.062653564">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -130,8 +127,8 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -403,7 +400,7 @@
     <option name="totallyTimeSpent" value="2053000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -442,6 +439,40 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpDownload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -525,8 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.555555">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        <state vertical-scroll-proportion="-1.8888888">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="22" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
@@ -535,11 +566,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.958231">
-          <caret line="93" column="4" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.062653564">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
