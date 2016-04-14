@@ -1,4 +1,7 @@
-﻿package com.synconset;
+﻿/**
+ * A HTTP plugin for Cordova / Phonegap
+ */
+package com.synconset;
 
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -28,32 +31,29 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
         super(urlString, jsonObj, headers, callbackContext);
     }
 
-    private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth)
-    {
+    private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth) {
         Map<String, String> entities = new HashMap();
 
-        if(jsonObject == null)
+        if (jsonObject == null)
             return entities;
 
-        if(prefix == null)
+        if (prefix == null)
             prefix = "";
 
-        try
-        {
+        try {
             Iterator<String> iterator = jsonObject.keys();
             while (iterator.hasNext()) {
                 String key = iterator.next();
                 try {
                     Object value = jsonObject.get(key);
-                    if(value == null)
+                    if (value == null)
                         continue;
 
-                    if ( value instanceof JSONObject ) {
-                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key)  + key, depth + 1));
-                    }
-                    else if( value instanceof JSONArray){
+                    if (value instanceof JSONObject) {
+                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key) + key, depth + 1));
+                    } else if (value instanceof JSONArray) {
                         //no brackets if we have a root element
-                        if(depth == 0) {
+                        if (depth == 0) {
                             for (int i = 0; i < ((JSONArray) value).length(); i++) {
                                 entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
                                         prefix +
@@ -68,10 +68,8 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
                                                 String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
                             }
                         }
-                    }
-                    else
-                    {
-                        if(!TextUtils.isEmpty(prefix)) //Don't add bracket to the root elements!
+                    } else {
+                        if (!TextUtils.isEmpty(prefix)) //Don't add bracket to the root elements!
                             key = prefix + String.format(KEY_FORMAT, key);
 
                         entities.put(key, String.valueOf(value));
@@ -80,9 +78,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
                     e.printStackTrace();
                 }
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -109,7 +105,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
             }
         } catch (JSONException e) {
             this.respondWithError("There was an error generating the response");
-        }  catch (HttpRequestException e) {
+        } catch (HttpRequestException e) {
             if (e.getCause() instanceof UnknownHostException) {
                 this.respondWithError(0, "The host could not be resolved");
             } else if (e.getCause() instanceof SSLHandshakeException) {
