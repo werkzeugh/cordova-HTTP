@@ -1,4 +1,4 @@
-﻿/**
+/**
  * A HTTP plugin for Cordova / Phonegap
  */
 package com.synconset;
@@ -22,16 +22,17 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 import java.util.Iterator;
-
+ 
 public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
-
+    
     final String KEY_FORMAT = "[%s]";
-
-    public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
+	
+	public CordovaHttpPostJson(String urlString, JSONObject jsonObj, Map<String, String> headers, CallbackContext callbackContext) {
         super(urlString, jsonObj, headers, callbackContext);
     }
-
-    private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth) {
+	
+	private Map<String, String> parseJson(JSONObject jsonObject, String prefix)
+    {
         Map<String, String> entities = new HashMap();
 
         if (jsonObject == null)
@@ -50,7 +51,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
                         continue;
 
                     if (value instanceof JSONObject) {
-                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key) + key, depth + 1));
+                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key), depth + 1));
                     } else if (value instanceof JSONArray) {
                         //no brackets if we have a root element
                         if (depth == 0) {
@@ -84,14 +85,14 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
 
         return entities;
     }
-
+    
     @Override
     public void run() {
         try {
             HttpRequest request = HttpRequest.post(this.getUrlString());
             this.setupSecurity(request);
             request.headers(this.getHeaders());
-            request.form(parseJson(getJsonObject(), null, 0));
+			request.form(parseJson(getJsonObject(), null));
             int code = request.code();
             String body = request.body(CHARSET);
             JSONObject response = new JSONObject();
@@ -105,7 +106,7 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
             }
         } catch (JSONException e) {
             this.respondWithError("There was an error generating the response");
-        } catch (HttpRequestException e) {
+        }  catch (HttpRequestException e) {
             if (e.getCause() instanceof UnknownHostException) {
                 this.respondWithError(0, "The host could not be resolved");
             } else if (e.getCause() instanceof SSLHandshakeException) {
