@@ -31,67 +31,67 @@ public class CordovaHttpPostJson extends CordovaHttp implements Runnable {
         super(urlString, jsonObj, headers, callbackContext);
     }
 
-    
     private Map<String, String> parseJson(JSONObject jsonObject, String prefix, long depth)
-    {
-        Map<String, String> entities = new HashMap();
+    {
+        Map<String, String> entities = new HashMap();
 
-        if(jsonObject == null)
-            return entities;
+        if(jsonObject == null)
+        return entities;
 
-        if(prefix == null)
-            prefix = "";
+        if(prefix == null)
+        prefix = "";
 
-        try
-        {
-            Iterator<String> iterator = jsonObject.keys();
-            while (iterator.hasNext()) {
-                String key = iterator.next();
-                try {
-                    Object value = jsonObject.get(key);
-                    if(value == null)
-                        continue;
+        try
+        {
+            Iterator<String> iterator = jsonObject.keys();
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                try {
+                    Object value = jsonObject.get(key);
+                    if(value == null)
+                    continue;
 
-                    if ( value instanceof JSONObject ) {
-                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key) , depth + 1));
-                    }
-                    else if( value instanceof JSONArray){
-                        //no brackets if we have a root element
-                        if(depth == 0) {
-                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
-                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
-                                        prefix +
-                                                key +
-                                                String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
-                            }
-                        } else {
-                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
-                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
-                                        prefix +
-                                                String.format(KEY_FORMAT, key) +
-                                                String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if(!TextUtils.isEmpty(prefix)) //Don't add bracket to the root elements!
-                            key = prefix + String.format(KEY_FORMAT, key);
+                    if ( value instanceof JSONObject ) {
+                        entities.putAll(parseJson((JSONObject) value, prefix + String.format(KEY_FORMAT, key) , depth + 1));
+                        }
+                    else if( value instanceof JSONArray){
+                        //no brackets if we have a root element
+                        if(depth == 0) {
+                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
+                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
+                                        prefix +
+                                        key +
+                                        String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
+                                }
+                            } else {
+                            for (int i = 0; i < ((JSONArray) value).length(); i++) {
+                                entities.putAll(parseJson(((JSONArray) value).getJSONObject(i),
+                                        prefix +
+                                        String.format(KEY_FORMAT, key) +
+                                        String.format(KEY_FORMAT, String.valueOf(i)), depth + 1));
+                                }
+                            }
+                        }
+                    else
+                    {
+                        if(!TextUtils.isEmpty(prefix)) //Don't add bracket to the root elements!
+                        key = prefix + String.format(KEY_FORMAT, key);
 
-                        entities.put(key, String.valueOf(value));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+                        entities.put(key, String.valueOf(value));
+                        }
+                    } catch (JSONException e) {
+                    e.printStackTrace();
+                    }
+                }
+            }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            }
 
-        return entities;
-    }
+        return entities;
+        }
+
 
     @Override
     public void run() {
