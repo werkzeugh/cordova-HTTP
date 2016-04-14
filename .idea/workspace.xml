@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="22d81cbe-331e-486f-9224-6f70dc9c611b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" afterPath="$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cordova-HTTP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +54,7 @@
       <file leaf-file-name="CordovaHttpPost.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41451415">
+            <state vertical-scroll-proportion="0.4809348">
               <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
@@ -635,8 +634,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPostJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.083640836">
-          <caret line="33" column="91" selection-start-line="33" selection-start-column="91" selection-end-line="33" selection-end-column="91" />
+        <state vertical-scroll-proportion="0.29643297">
+          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -645,7 +644,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/android/com/synconset/CordovaHTTP/CordovaHttpPost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41451415">
+        <state vertical-scroll-proportion="0.4809348">
           <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
