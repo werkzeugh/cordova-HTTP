@@ -2647,7 +2647,8 @@ public class HttpRequest {
       public HttpRequest run() throws IOException {
         final byte[] buffer = new byte[bufferSize];
         int read;
-        totalSize = contentLength();
+        //totalSize = contentLength();
+        totalSize = -1;
         while ((read = input.read(buffer)) != -1) {
           output.write(buffer, 0, read);
           totalWritten += read;
