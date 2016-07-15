@@ -184,10 +184,13 @@
     NSString *filePath = [command.arguments objectAtIndex: 3];
     NSString *name = [command.arguments objectAtIndex: 4];
     
+    NSError *regexError = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^file:\\/\\/" options:NSRegularExpressionCaseInsensitive error:&regexError];
+    filePath = [regex stringByReplacingMatchesInString:filePath options:0 range:NSMakeRange(0, [filePath length]) withTemplate:@""];
     NSURL *fileURL = [NSURL fileURLWithPath: filePath];
-    
+
     [self setRequestHeaders: headers];
-    
+
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
     [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -206,6 +209,7 @@
         [dictionary setObject:[NSNumber numberWithInt:operation.response.statusCode] forKey:@"status"];
         if (operation.response != nil) {
             [dictionary setObject:operation.response.allHeaderFields forKey:@"headers"];
+            [dictionary setObject:responseObject forKey:@"data"];
         }
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
