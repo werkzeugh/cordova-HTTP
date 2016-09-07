@@ -5,7 +5,7 @@
 
 @interface CordovaHttpPlugin()
 {
-    int downloadProgressPercentage;
+    CFTimeInterval startTime;
 }
 
 - (void)setRequestHeaders:(NSDictionary*)headers;
@@ -239,7 +239,7 @@
         filePath = [filePath substringFromIndex:7];
     }
     
-    downloadProgressPercentage = 0;
+    startTime = CACurrentMediaTime();
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -299,9 +299,9 @@
             [dictionary setObject:operation.response.allHeaderFields forKey:@"headers"];
         }
         [dictionary setObject:[filePlugin getDirectoryEntry:filePath isDirectory:NO] forKey:@"file"];
-        [dictionary setObject:[NSNumber numberWithInt:downloadProgressPercentage] forKey:@"percentage"];
+        [dictionary setObject:[NSNumber numberWithInt:100] forKey:@"percentage"];
         [dictionary setObject:@YES forKey:@"finished"];
-        NSLog(@"success: %i", (int)downloadProgressPercentage);
+        NSLog(@"file download success");
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -314,21 +314,23 @@
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }progress:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        int progressPercentage = ((float)totalBytesRead / totalBytesExpectedToRead) * 100;
-        if (progressPercentage > downloadProgressPercentage)
-        {
-            downloadProgressPercentage = progressPercentage;
+        
+        CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
+        
+        //only allow an update every second
+        if (elapsedTime >= 0.1) {
+            int progressPercentage = ((float)totalBytesRead / totalBytesExpectedToRead) * 100;
             //NSLog(@"progress %i accurate progress %f", progressPercentage, ((float)totalBytesRead / totalBytesExpectedToRead) * 100);
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-            [dictionary setObject:[NSNumber numberWithInt:downloadProgressPercentage] forKey:@"percentage"];
+            [dictionary setObject:[NSNumber numberWithInt:progressPercentage] forKey:@"percentage"];
             [dictionary setObject:@NO forKey:@"finished"];
             
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
             pluginResult.keepCallback = [NSNumber numberWithBool:YES];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        }        
+            startTime = CACurrentMediaTime();
+        }
     }];
 }
-
 @end
