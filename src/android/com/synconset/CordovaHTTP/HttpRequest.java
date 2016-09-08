@@ -2647,7 +2647,33 @@ public class HttpRequest {
       public HttpRequest run() throws IOException {
         final byte[] buffer = new byte[bufferSize];
         int read;
-        //totalSize = contentLength();
+        totalSize = contentLength();
+        while ((read = input.read(buffer)) != -1) {
+          output.write(buffer, 0, read);
+          totalWritten += read;
+          progress.onUpload(totalWritten, totalSize);
+        }
+        return HttpRequest.this;
+      }
+    }.call();
+  }
+
+  /**
+   * Copy from input stream to output stream
+   *
+   * @param input
+   * @param output
+   * @return this request
+   * @throws IOException
+   */
+  protected HttpRequest nonClosingCopy(final InputStream input, final OutputStream output)
+          throws IOException {
+    return new CloseOperation<HttpRequest>(input, ignoreCloseExceptions) {
+
+      @Override
+      public HttpRequest run() throws IOException {
+        final byte[] buffer = new byte[bufferSize];
+        int read;
         totalSize = -1;
         while ((read = input.read(buffer)) != -1) {
           output.write(buffer, 0, read);
@@ -2969,7 +2995,7 @@ public class HttpRequest {
     try {
       startPart();
       writePartHeader(name, filename, contentType);
-      copy(part, output);
+      nonClosingCopy(part, output);
     } catch (IOException e) {
       throw new HttpRequestException(e);
     }
